@@ -24,13 +24,19 @@ public class Main {
         float sum = 0;
         int healthyCount = 0;
 
-        for (int i = 0; i < array.length; i++) {
-            result = result.concat("[ ").concat(String.valueOf(String.format("%.10f", array[i]))).concat(" ]\n");
-            sum += array[i];
-            if (array[i] > 36.2 && array[i] < 36.9) {
+        for (float patient : array) {
+            result = result.concat("[ ").concat(String.format("%.1f", patient)).concat(" ]");
+            sum += patient;
+            if (patient > 36.2 && patient < 36.9) {
+                result = result.concat(" [ HEALTHY ]\n");
                 healthyCount++;
+            } else {
+                result = result.concat(" [ SICK! ALARM! ]\n");
             }
         }
+
+        result = result.concat("[ AVG: ").concat(String.format("%.1f", sum / array.length)).concat(" ]\n");
+        result = result.concat("[ Healthy count: " + healthyCount + " ]\n");
 
         return result;
     }
